@@ -1,0 +1,51 @@
+<div>
+  <h1>
+    STOCK MARCKET 
+  </h1>
+  <h2  *ngIf="myStocksQuote.length>0"> Time to refresh {{ counter }} </h2>
+  <div *ngIf="myStocksQuote.length>0"> last UpdateId {{ updateid }} </div>
+</div>
+
+  <div style="width: 100%; height: 500px; display: flex;">
+    <div style="width: 35%;">
+      <span>Search</span>
+      <div><input type="text" [formControl]="formGroup.controls.search" > </div>
+       <div style="width: 400px;height: auto;" *ngIf="rows">
+          <div *ngFor="let r of rows" (click)="addToList(r.Symbol)">
+            {{r.Symbol}} -  {{r.Name}}
+          </div>
+       </div>
+    </div>
+    <div style="width: 65%;">
+      <div>
+        LIST
+      </div>
+      <div *ngFor="let s of myStocks" style="display: flex;height: 30px;"> 
+        <div style="width: 50px;" (click)="removeMe(s)"> X </div>
+        <div style="width: 100px;">{{s}}</div>
+      </div>
+      <br>
+      <br>
+      <div *ngFor="let s of myStocksQuote" style="display: flex;height: 30px;"> 
+        <div style="width: 50px;" (click)="removeMe(s.Symbol)"> X </div>
+        <div style="width: 100px;">{{s.Symbol}}</div>
+        <div style="width: 100px;">{{s.Name}}</div>
+        <div style="width: 100px;">{{s.Ask  | number : '1.2-2'}}</div>
+        <div style="width: 100px;">{{s.Bid  | number : '1.2-2'}}</div>
+        <div style="width: 100px;">{{s.LastPrice  | number : '1.2-2'}}</div>
+        <div style="width: 100px;">{{s.UpdateId}}</div>
+      </div>
+    </div>
+  </div>
+
+<!--
+  Ask: "680.612187218206"
+AskSize: "336"
+BasePrice: "388.00113107450358"
+Bid: "392.97829446987168"
+BidSize: "204"
+LastPrice: "525.21787142624044"
+Name: "Microsoft Corp."
+Symbol: "MSFT"
+UpdateId: "1644822093"
+-->
